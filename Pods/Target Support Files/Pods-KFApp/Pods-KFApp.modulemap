@@ -1,0 +1,6 @@
+framework module Pods_KFApp {
+  umbrella header "Pods-KFApp-umbrella.h"
+
+  export *
+  module * { export * }
+}

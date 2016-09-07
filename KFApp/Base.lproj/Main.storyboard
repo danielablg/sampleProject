@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="MgI-Ta-nxr">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="9as-O2-X2L">
+            <objects>
+                <navigationController id="MgI-Ta-nxr" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="77e-lK-PhP">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="SOm-kD-PJL" kind="relationship" relationship="rootViewController" id="Lwl-j0-wxS"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="E8U-U1-hrQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-912" y="327"/>
+        </scene>
+        <!--b&q-->
+        <scene sceneID="hGj-Mw-y7b">
+            <objects>
+                <viewController id="SOm-kD-PJL" customClass="ViewController" customModule="KFApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Had-pI-XMa"/>
+                        <viewControllerLayoutGuide type="bottom" id="IbV-x1-m61"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="FzA-zR-jnc">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="mlj-tk-EsB">
+                                <rect key="frame" x="0.0" y="64" width="320" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="SOm-kD-PJL" id="igH-98-tuA"/>
+                                </connections>
+                            </searchBar>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="60h-o6-mL6">
+                                <rect key="frame" x="0.0" y="108" width="320" height="100"/>
+                                <color key="backgroundColor" red="1" green="0.16078431369999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="600" id="G1g-69-u6A"/>
+                                    <constraint firstAttribute="height" constant="311" id="GR8-qB-ooh"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="G1g-69-u6A"/>
+                                        <exclude reference="GR8-qB-ooh"/>
+                                    </mask>
+                                </variation>
+                            </scrollView>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="gUO-mV-gsX">
+                                <rect key="frame" x="140" y="168" width="39" height="37"/>
+                            </pageControl>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eyz-e7-xhe">
+                                <rect key="frame" x="0.0" y="208" width="320" height="392"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="eyz-e7-xhe" secondAttribute="trailing" id="4r5-ne-SDi"/>
+                            <constraint firstItem="eyz-e7-xhe" firstAttribute="top" secondItem="60h-o6-mL6" secondAttribute="bottom" id="A7G-nC-pbA"/>
+                            <constraint firstItem="eyz-e7-xhe" firstAttribute="leading" secondItem="FzA-zR-jnc" secondAttribute="leading" id="Agy-SL-bwY"/>
+                            <constraint firstItem="mlj-tk-EsB" firstAttribute="leading" secondItem="FzA-zR-jnc" secondAttribute="leading" id="KkN-ej-gry"/>
+                            <constraint firstItem="60h-o6-mL6" firstAttribute="top" secondItem="mlj-tk-EsB" secondAttribute="bottom" id="Lym-aM-Bfu"/>
+                            <constraint firstItem="gUO-mV-gsX" firstAttribute="centerX" secondItem="FzA-zR-jnc" secondAttribute="centerX" id="MS8-BO-AqR"/>
+                            <constraint firstItem="60h-o6-mL6" firstAttribute="leading" secondItem="FzA-zR-jnc" secondAttribute="leading" id="PjH-PY-ctI"/>
+                            <constraint firstItem="mlj-tk-EsB" firstAttribute="top" secondItem="FzA-zR-jnc" secondAttribute="topMargin" constant="64" id="V69-9n-U02"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="eyz-e7-xhe" secondAttribute="bottom" id="fnI-SA-PT8"/>
+                            <constraint firstItem="IbV-x1-m61" firstAttribute="top" secondItem="60h-o6-mL6" secondAttribute="bottom" constant="392" id="fsN-WA-tcy"/>
+                            <constraint firstItem="gUO-mV-gsX" firstAttribute="top" secondItem="60h-o6-mL6" secondAttribute="bottom" constant="-40" id="jLM-Wf-nLN"/>
+                            <constraint firstItem="60h-o6-mL6" firstAttribute="trailing" secondItem="mlj-tk-EsB" secondAttribute="trailing" id="qgK-tQ-gDQ"/>
+                            <constraint firstAttribute="trailing" secondItem="mlj-tk-EsB" secondAttribute="trailing" id="rz1-uL-V74"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="b&amp;q" id="f7i-F3-kvL"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="600"/>
+                    <connections>
+                        <outlet property="pageControl" destination="gUO-mV-gsX" id="Gqa-nN-aFy"/>
+                        <outlet property="scrollView" destination="60h-o6-mL6" id="xVV-uy-8jB"/>
+                        <outlet property="searchDisplayController" destination="utw-Mf-hoA" id="6nC-uT-gxp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AXS-L9-k62" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="utw-Mf-hoA">
+                    <connections>
+                        <outlet property="delegate" destination="SOm-kD-PJL" id="OiQ-IB-1Xb"/>
+                        <outlet property="searchBar" destination="mlj-tk-EsB" id="1vh-kD-1W0"/>
+                        <outlet property="searchContentsController" destination="SOm-kD-PJL" id="GIw-HI-yjx"/>
+                        <outlet property="searchResultsDataSource" destination="SOm-kD-PJL" id="WFN-Jq-b8a"/>
+                        <outlet property="searchResultsDelegate" destination="SOm-kD-PJL" id="zaQ-0c-ILk"/>
+                    </connections>
+                </searchDisplayController>
+            </objects>
+            <point key="canvasLocation" x="-108" y="327"/>
+        </scene>
+    </scenes>
+</document>
