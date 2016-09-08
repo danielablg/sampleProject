@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		392A14C41D806D2800BD334A /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392A14C21D806D2800BD334A /* ProductTableViewCell.swift */; };
+		392A14C51D806D2800BD334A /* ProductTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 392A14C31D806D2800BD334A /* ProductTableViewCell.xib */; };
 		3964FE5B1D7F081F00C65F2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3964FE5A1D7F081F00C65F2B /* AppDelegate.swift */; };
 		3964FE5D1D7F081F00C65F2B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3964FE5C1D7F081F00C65F2B /* ViewController.swift */; };
 		3964FE601D7F081F00C65F2B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3964FE5E1D7F081F00C65F2B /* Main.storyboard */; };
@@ -16,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		392A14C21D806D2800BD334A /* ProductTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
+		392A14C31D806D2800BD334A /* ProductTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductTableViewCell.xib; sourceTree = "<group>"; };
 		3964FE571D7F081F00C65F2B /* KFApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KFApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3964FE5A1D7F081F00C65F2B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3964FE5C1D7F081F00C65F2B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -48,6 +52,30 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		392A14C81D816DC300BD334A /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				392A14C21D806D2800BD334A /* ProductTableViewCell.swift */,
+				392A14C31D806D2800BD334A /* ProductTableViewCell.xib */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		392A14C91D816DCE00BD334A /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				3964FE5A1D7F081F00C65F2B /* AppDelegate.swift */,
+			);
+			name = AppDelegate;
+			sourceTree = "<group>";
+		};
+		392A14CA1D817ECF00BD334A /* Parser */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Parser;
+			sourceTree = "<group>";
+		};
 		3964FE4E1D7F081F00C65F2B = {
 			isa = PBXGroup;
 			children = (
@@ -69,7 +97,9 @@
 		3964FE591D7F081F00C65F2B /* KFApp */ = {
 			isa = PBXGroup;
 			children = (
-				3964FE5A1D7F081F00C65F2B /* AppDelegate.swift */,
+				392A14CA1D817ECF00BD334A /* Parser */,
+				392A14C81D816DC300BD334A /* Cell */,
+				392A14C91D816DCE00BD334A /* AppDelegate */,
 				3964FE5C1D7F081F00C65F2B /* ViewController.swift */,
 				3964FE5E1D7F081F00C65F2B /* Main.storyboard */,
 				3964FE631D7F081F00C65F2B /* LaunchScreen.storyboard */,
@@ -151,6 +181,7 @@
 			files = (
 				3964FE651D7F081F00C65F2B /* LaunchScreen.storyboard in Resources */,
 				3964FE6D1D8031FC00C65F2B /* Assets.xcassets in Resources */,
+				392A14C51D806D2800BD334A /* ProductTableViewCell.xib in Resources */,
 				3964FE601D7F081F00C65F2B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -211,6 +242,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3964FE5D1D7F081F00C65F2B /* ViewController.swift in Sources */,
+				392A14C41D806D2800BD334A /* ProductTableViewCell.swift in Sources */,
 				3964FE5B1D7F081F00C65F2B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

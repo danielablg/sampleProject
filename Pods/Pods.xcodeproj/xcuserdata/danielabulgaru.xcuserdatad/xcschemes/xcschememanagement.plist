@@ -9,20 +9,10 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>TABSwiftLayout.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>8273C937A4274CFA55DF0D2B9182645D</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>FCFB0C0B6526E5CB2B012AAD6E272180</key>
+		<key>CC1BD0D7123C10F95125AEBE34549EBE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
