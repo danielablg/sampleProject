@@ -7,94 +7,128 @@
 //
 
 import UIKit
-//import Alamofire
+import Alamofire
+import JSONUtilities
 
 class ViewController: UIViewController {
   
-  let addImages: [UIImage?] = [UIImage(named: "11"), UIImage(named: "22"), UIImage(named: "33"),
-                               UIImage(named: "11"), UIImage(named: "22")]
+  private var products: [Product] = []
+  private lazy var scrollView: AddsScrollView = AddsScrollView.loadFromNib()
   
-  @IBOutlet private var pageControl: UIPageControl!
-  @IBOutlet private var scrollView: UIScrollView!
+  @IBOutlet private var searchBar: UISearchBar!
   @IBOutlet private var tableView: UITableView!
-  
-  var frame: CGRect = CGRectZero
-  
+
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
     registerTableViewCells()
   }
 
-  override func viewDidLayoutSubviews() {
-    super.viewDidLayoutSubviews()
-    
-    tableView.backgroundColor = .whiteColor()
-    
-    for index in 0..<addImages.count {
-      
-      frame.origin.x = scrollView.frame.size.width * CGFloat(index)
-      frame.size = scrollView.frame.size
-      
-      let subView = UIImageView(frame: frame)
-      subView.contentMode = .ScaleAspectFit
-      subView.image = addImages[index]
-      
-      scrollView.addSubview(subView)
-    }
-    
-    scrollView.contentSize = CGSizeMake(scrollView.frame.size.width * CGFloat(addImages.count), scrollView.frame.size.height)
-  }
-  
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    navigationController?.navigationBar.backgroundColor = .orangeColor()
 
-    configurePageControl()
-    scrollView.delegate = self
-    scrollView.backgroundColor = .whiteColor()
+    setupNavBar()
     
-    pageControl.addTarget(self, action: #selector(changePage), forControlEvents: UIControlEvents.ValueChanged)
+    tableView.tableHeaderView = scrollView
+    initialRequest()
+    
+    
+//    searchBar.dimsBackgroundDuringPresentation = false
+//    searchBar.searchBar.sizeToFit()
+    
   }
   
-  private func configurePageControl() {
-    pageControl.numberOfPages = addImages.count
-    pageControl.currentPage = 0
-    pageControl.pageIndicatorTintColor = .lightGrayColor()
-    pageControl.currentPageIndicatorTintColor = UIColor.whiteColor()
+  private func initialRequest() {
+    Alamofire.request(.GET, "http://localhost:8081/scrape?page=1&items_per_page=20", parameters: nil)
+      .responseJSON { response in
+        
+        guard response.result.isSuccess else {
+          print("Error while fetching products: \(response.result.error)")
+          return
+        }
+        
+        guard let productsFromResult = response.result.value as? [[String: AnyObject]] else {
+          print("Malformed data received from fetchProducts service")
+          return
+        }
+        
+        var products = [Product]()
+        for product in productsFromResult {
+          products.append(Product(jsonData: product))
+        }
+        
+        self.products = products
+        self.tableView.reloadData()
+    }
   }
-  
-  @objc private func changePage(sender: AnyObject) -> () {
-    let x = CGFloat(pageControl.currentPage) * scrollView.frame.size.width
-    scrollView.setContentOffset(CGPointMake(x, 0), animated: true)
-  }
-  
+
   private func registerTableViewCells() {
     let nib = UINib(nibName: "\(ProductTableViewCell.self)", bundle: nil)
     tableView.registerNib(nib, forCellReuseIdentifier: ProductTableViewCell.reuseIdentifier)
+    
   }
-}
-
-extension ViewController: UIScrollViewDelegate {
-  func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-    let pageNumber = round(scrollView.contentOffset.x / scrollView.frame.size.width)
-    pageControl.currentPage = Int(pageNumber)
+  
+  private func setupNavBar() {
+    navigationController?.navigationBar.barTintColor = .orangeColor()
+    navigationController?.navigationBar.tintColor = .whiteColor()
+    navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
+    
+    var image = UIImage(named: "basket")
+    image = image?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+    navigationItem.rightBarButtonItem = UIBarButtonItem(image: image, style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
   }
 }
 
 extension ViewController: UITableViewDataSource {
   
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 3
+    return products.count
   }
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     guard let
-      cell = tableView.dequeueReusableCellWithIdentifier(ProductTableViewCell.reuseIdentifier, forIndexPath: indexPath) as? ProductTableViewCell
+      cell = tableView.dequeueReusableCellWithIdentifier(ProductTableViewCell.reuseIdentifier) as? ProductTableViewCell
       else {
         return UITableViewCell()
     }
+    
+    cell.configure(product: products[indexPath.row])
     return cell
-
   }
+
+}
+
+extension ViewController: UITableViewDelegate {
+  
+  func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    return UITableViewAutomaticDimension
+  }
+  
+  func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    return UITableViewAutomaticDimension
+  }
+  
+  func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    tableView.deselectRowAtIndexPath(indexPath, animated: false)
+  }
+}
+
+extension ViewController: UISearchBarDelegate {
+  func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+  }
+  
+  func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+  }
+  
+  func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+  }
+  
+  func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+  }
+  
+  func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+    
+  }
+  
+  
+
 }

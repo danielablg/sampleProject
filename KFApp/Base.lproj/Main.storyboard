@@ -34,67 +34,51 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" placeholder="Search product" translatesAutoresizingMaskIntoConstraints="NO" id="mlj-tk-EsB">
-                                <rect key="frame" x="44" y="64" width="276" height="44"/>
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search product" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mlj-tk-EsB">
+                                <rect key="frame" x="40" y="64" width="280" height="44"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="barTintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
-                                    <outlet property="delegate" destination="SOm-kD-PJL" id="igH-98-tuA"/>
+                                    <outlet property="delegate" destination="SOm-kD-PJL" id="Rc1-pg-ADL"/>
                                 </connections>
                             </searchBar>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="60h-o6-mL6">
-                                <rect key="frame" x="0.0" y="108" width="320" height="170"/>
-                                <color key="backgroundColor" red="1" green="0.16078431369999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="170" id="eAz-ri-I59"/>
-                                </constraints>
-                            </scrollView>
-                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="gUO-mV-gsX">
-                                <rect key="frame" x="140" y="238" width="39" height="37"/>
-                            </pageControl>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="F8m-sJ-7Yx">
-                                <rect key="frame" x="0.0" y="278" width="320" height="322"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                            </tableView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="site-logo" translatesAutoresizingMaskIntoConstraints="NO" id="Lyd-QB-iHY">
-                                <rect key="frame" x="6" y="70" width="32" height="32"/>
+                                <rect key="frame" x="8" y="70" width="32" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="fX6-sq-sQo"/>
                                     <constraint firstAttribute="width" constant="32" id="oxK-7D-vhm"/>
                                 </constraints>
                             </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="F8m-sJ-7Yx">
+                                <rect key="frame" x="0.0" y="108" width="320" height="492"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="SOm-kD-PJL" id="3VR-Is-p9Q"/>
+                                    <outlet property="delegate" destination="SOm-kD-PJL" id="qOj-9s-7Yb"/>
+                                </connections>
+                            </tableView>
                         </subviews>
-                        <color key="backgroundColor" red="0.51764705882352946" green="0.51764705882352946" blue="0.51764705882352946" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="F8m-sJ-7Yx" firstAttribute="leading" secondItem="FzA-zR-jnc" secondAttribute="leading" id="5Hd-ZE-KhV"/>
-                            <constraint firstItem="gUO-mV-gsX" firstAttribute="centerX" secondItem="60h-o6-mL6" secondAttribute="centerX" id="6zN-4a-zt7"/>
+                            <constraint firstItem="F8m-sJ-7Yx" firstAttribute="top" secondItem="Lyd-QB-iHY" secondAttribute="bottom" constant="6" id="Ck1-mb-miS"/>
                             <constraint firstItem="Lyd-QB-iHY" firstAttribute="top" secondItem="FzA-zR-jnc" secondAttribute="topMargin" constant="70" id="Jsl-3X-G3B"/>
-                            <constraint firstItem="60h-o6-mL6" firstAttribute="leading" secondItem="FzA-zR-jnc" secondAttribute="leading" id="OTq-J5-2kM"/>
                             <constraint firstAttribute="trailing" secondItem="F8m-sJ-7Yx" secondAttribute="trailing" id="Sgb-D1-vMb"/>
                             <constraint firstItem="mlj-tk-EsB" firstAttribute="top" secondItem="FzA-zR-jnc" secondAttribute="topMargin" constant="64" id="US4-bs-pUa"/>
-                            <constraint firstItem="Lyd-QB-iHY" firstAttribute="leading" secondItem="FzA-zR-jnc" secondAttribute="leading" constant="6" id="WSm-3b-lY7"/>
-                            <constraint firstAttribute="trailing" secondItem="60h-o6-mL6" secondAttribute="trailing" id="blA-gn-JkF"/>
-                            <constraint firstItem="60h-o6-mL6" firstAttribute="top" secondItem="mlj-tk-EsB" secondAttribute="bottom" id="eU0-7p-uI1"/>
-                            <constraint firstItem="mlj-tk-EsB" firstAttribute="leading" secondItem="FzA-zR-jnc" secondAttribute="leading" constant="30" id="fXM-WD-sRy"/>
+                            <constraint firstItem="Lyd-QB-iHY" firstAttribute="leading" secondItem="FzA-zR-jnc" secondAttribute="leading" constant="8" id="WSm-3b-lY7"/>
                             <constraint firstAttribute="bottomMargin" secondItem="F8m-sJ-7Yx" secondAttribute="bottom" id="gAx-Ii-tL3"/>
-                            <constraint firstItem="gUO-mV-gsX" firstAttribute="top" secondItem="60h-o6-mL6" secondAttribute="bottom" constant="-40" id="gDU-2a-Yv5"/>
                             <constraint firstAttribute="trailing" secondItem="mlj-tk-EsB" secondAttribute="trailing" id="oGx-Za-76B"/>
-                            <constraint firstItem="mlj-tk-EsB" firstAttribute="leading" secondItem="Lyd-QB-iHY" secondAttribute="trailing" constant="6" id="qk8-6k-LMw"/>
-                            <constraint firstItem="F8m-sJ-7Yx" firstAttribute="top" secondItem="60h-o6-mL6" secondAttribute="bottom" id="rKw-21-ibQ"/>
+                            <constraint firstItem="mlj-tk-EsB" firstAttribute="leading" secondItem="Lyd-QB-iHY" secondAttribute="trailing" id="qk8-6k-LMw"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="fXM-WD-sRy"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Home" id="f7i-F3-kvL"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="600"/>
                     <connections>
-                        <outlet property="pageControl" destination="gUO-mV-gsX" id="Gqa-nN-aFy"/>
-                        <outlet property="scrollView" destination="60h-o6-mL6" id="xVV-uy-8jB"/>
+                        <outlet property="searchBar" destination="mlj-tk-EsB" id="1aW-ah-Scv"/>
                         <outlet property="searchDisplayController" destination="utw-Mf-hoA" id="6nC-uT-gxp"/>
                         <outlet property="tableView" destination="F8m-sJ-7Yx" id="tJB-va-8Gn"/>
                     </connections>
@@ -110,7 +94,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="-108" y="327"/>
+            <point key="canvasLocation" x="-306" y="327"/>
         </scene>
     </scenes>
     <resources>

@@ -1,3 +1,15 @@
-PODFILE CHECKSUM: 90791a0a6cff33ecef08ec3a76a5d0fd038b82a9
+PODS:
+  - Alamofire (3.4.2)
+  - JSONUtilities (2.5.0)
+
+DEPENDENCIES:
+  - Alamofire
+  - JSONUtilities (= 2.5.0)
+
+SPEC CHECKSUMS:
+  Alamofire: 6aa33201d20d069e1598891cf928883ff1888c7a
+  JSONUtilities: 26155df3735ec2cc15d112bebe0ed623e7effdc5
+
+PODFILE CHECKSUM: e2fa563a6846bdbf0d6fdb963b0a7ff0b85a0492
 
 COCOAPODS: 1.0.1

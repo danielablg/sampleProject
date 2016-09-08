@@ -6,5 +6,7 @@ target 'KFApp' do
   use_frameworks!
   
   # Pods for KFApp
+  pod 'Alamofire'
+  pod 'JSONUtilities', '2.5.0'
 
 end

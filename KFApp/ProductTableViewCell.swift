@@ -18,9 +18,12 @@ final class ProductTableViewCell: UITableViewCell {
   @IBOutlet private var productTitle: UILabel!
   @IBOutlet private var productCollection: UILabel!
   @IBOutlet private var productHomeDelivery: UILabel!
+  @IBOutlet private var productInStore: UILabel!
   
-  
-  func configure() {
-    backgroundColor = .redColor()
+  func configure(product product: Product) {
+    productPrice.text = product.price
+    productTitle.text = product.name
+    productCollection.text = product.availableForCollection
+    productHomeDelivery.text = product.homeDelivery
   }
 }
