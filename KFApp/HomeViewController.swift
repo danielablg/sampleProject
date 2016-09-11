@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  HomeViewController.swift
 //  KFApp
 //
 //  Created by Daniela Bulgaru on 06/09/2016.
@@ -13,7 +13,7 @@ import TABSwiftLayout
 import SDWebImage
 
 
-class ViewController: UIViewController {
+class HomeViewController: UIViewController {
   
   private var products: [Product] = []
   private lazy var scrollView: AddsScrollView = AddsScrollView.loadFromNib()
@@ -104,7 +104,7 @@ class ViewController: UIViewController {
   }
 }
 
-extension ViewController: UITableViewDataSource {
+extension HomeViewController: UITableViewDataSource {
   
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return products.count
@@ -144,7 +144,7 @@ extension ViewController: UITableViewDataSource {
 
 }
 
-extension ViewController: UITableViewDelegate {
+extension HomeViewController: UITableViewDelegate {
   
   func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
     return UITableViewAutomaticDimension
@@ -159,7 +159,7 @@ extension ViewController: UITableViewDelegate {
   }
 }
 
-extension ViewController: UISearchBarDelegate {
+extension HomeViewController: UISearchBarDelegate {
   
   func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
     products.removeAll()

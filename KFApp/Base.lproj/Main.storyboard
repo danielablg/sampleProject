@@ -25,7 +25,7 @@
         <!--Home-->
         <scene sceneID="hGj-Mw-y7b">
             <objects>
-                <viewController id="SOm-kD-PJL" customClass="ViewController" customModule="KFApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="SOm-kD-PJL" customClass="HomeViewController" customModule="KFApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Had-pI-XMa"/>
                         <viewControllerLayoutGuide type="bottom" id="IbV-x1-m61"/>
