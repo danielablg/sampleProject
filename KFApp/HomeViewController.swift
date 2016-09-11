@@ -15,14 +15,11 @@ import SDWebImage
 
 class HomeViewController: UIViewController {
   
-  @IBOutlet private var searchBar: UISearchBar!
   @IBOutlet private var tableView: UITableView!
   
   private var products: [Product] = []
-//  private lazy var scrollView: AddsScrollView = AddsScrollView.loadFromNib()
   private let searchController = UISearchController(searchResultsController: nil)
-
-
+  
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
   }
@@ -93,15 +90,14 @@ class HomeViewController: UIViewController {
         }
         
         self.products = products
-        self.searchDisplayController?.searchResultsTableView.reloadData()
+        self.tableView.reloadData()
     }
   }
 
   private func registerTableViewCells() {
     let nib = UINib(nibName: "\(ProductTableViewCell.self)", bundle: nil)
     tableView.registerNib(nib, forCellReuseIdentifier: ProductTableViewCell.reuseIdentifier)
-   
-    searchDisplayController?.searchResultsTableView.registerNib(nib, forCellReuseIdentifier: ProductTableViewCell.reuseIdentifier)
+//    searchController.searchDisplayController?.searchResultsTableView.registerNib(nib, forCellReuseIdentifier: ProductTableViewCell.reuseIdentifier)
   }
   
   private func setupNavBar() {
@@ -170,36 +166,33 @@ extension HomeViewController: UITableViewDelegate {
   }
   
   func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    if searchController.active == true {
+      return nil
+    }
     return AddsScrollView.loadFromNib()
   }
   
-  func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-    return 1
-  }
-  
   func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-    return 179
-  }
-
-  func tableView(tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
-    return 170
-  }
-}
-
-extension HomeViewController: UISearchBarDelegate {
-  
-  func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-    products.removeAll()
-    
-    if searchText == "Tool" {
-      anotherRequest()
-      searchDisplayController?.searchResultsTableView.reloadData()
+    if searchController.active == true {
+      return 0
     }
+    return 179
   }
 }
 
 extension HomeViewController: UISearchResultsUpdating {
+  
+  func filterContentForSearchText(searchText: String) {
+    products = []
+    
+    if searchText == "Tool" {
+      anotherRequest()
+    } else {
+      tableView.reloadData()
+    }
+  }
+  
   func updateSearchResultsForSearchController(searchController: UISearchController) {
-//    filterContentForSearchText(searchController.searchBar.text!)
+    filterContentForSearchText(searchController.searchBar.text!)
   }
 }
