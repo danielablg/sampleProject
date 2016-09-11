@@ -15,11 +15,13 @@ import SDWebImage
 
 class HomeViewController: UIViewController {
   
-  private var products: [Product] = []
-  private lazy var scrollView: AddsScrollView = AddsScrollView.loadFromNib()
-  
   @IBOutlet private var searchBar: UISearchBar!
   @IBOutlet private var tableView: UITableView!
+  
+  private var products: [Product] = []
+//  private lazy var scrollView: AddsScrollView = AddsScrollView.loadFromNib()
+  private let searchController = UISearchController(searchResultsController: nil)
+
 
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
@@ -28,16 +30,25 @@ class HomeViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     registerTableViewCells()
-
     setupNavBar()
-    
-    tableView.tableHeaderView = scrollView
+    setupSearchController()
     initialRequest()
+  }
+
+  private func setupSearchController() {
+    searchController.searchResultsUpdater = self
+    searchController.dimsBackgroundDuringPresentation = false
+    definesPresentationContext = true
+    tableView.tableHeaderView = searchController.searchBar
+    
+    searchController.searchBar.placeholder = "Search for product"
+    searchController.searchBar.barTintColor = UIColor.darkGrayColor()
+    searchController.searchBar.tintColor = UIColor.whiteColor()
   }
   
   private func initialRequest() {
-//    Alamofire.request(.GET, "http://localhost:8081/scrape?page=1&items_per_page=20", parameters: nil)
-    Alamofire.request(.GET, "http://10.5.1.86:8081/scrape?page=1&items_per_page=20", parameters: nil)
+    Alamofire.request(.GET, "http://localhost:8081/scrape?page=1&items_per_page=20", parameters: nil)
+//    Alamofire.request(.GET, "http://10.5.1.86:8081/scrape?page=1&items_per_page=20", parameters: nil)
 
       .responseJSON { response in
         
@@ -62,8 +73,8 @@ class HomeViewController: UIViewController {
   }
   
   private func anotherRequest() {
-//    Alamofire.request(.GET, "http://localhost:8081/scrape?page=1&items_per_page=60", parameters: nil)
-    Alamofire.request(.GET, "http://10.5.1.86:8081/scrape?page=1&items_per_page=60", parameters: nil)
+    Alamofire.request(.GET, "http://localhost:8081/scrape?page=1&items_per_page=60", parameters: nil)
+//    Alamofire.request(.GET, "http://10.5.1.86:8081/scrape?page=1&items_per_page=60", parameters: nil)
       .responseJSON { response in
         
         guard response.result.isSuccess else {
@@ -157,6 +168,22 @@ extension HomeViewController: UITableViewDelegate {
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     tableView.deselectRowAtIndexPath(indexPath, animated: false)
   }
+  
+  func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    return AddsScrollView.loadFromNib()
+  }
+  
+  func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    return 1
+  }
+  
+  func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    return 179
+  }
+
+  func tableView(tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+    return 170
+  }
 }
 
 extension HomeViewController: UISearchBarDelegate {
@@ -168,5 +195,11 @@ extension HomeViewController: UISearchBarDelegate {
       anotherRequest()
       searchDisplayController?.searchResultsTableView.reloadData()
     }
+  }
+}
+
+extension HomeViewController: UISearchResultsUpdating {
+  func updateSearchResultsForSearchController(searchController: UISearchController) {
+//    filterContentForSearchText(searchController.searchBar.text!)
   }
 }

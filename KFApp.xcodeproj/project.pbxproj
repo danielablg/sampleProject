@@ -13,8 +13,6 @@
 		392A14D01D81CBD100BD334A /* AddsScrollView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 392A14CF1D81CBD100BD334A /* AddsScrollView.xib */; };
 		392A14D21D81CCA300BD334A /* AddsScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392A14D11D81CCA300BD334A /* AddsScrollView.swift */; };
 		392A14D41D81D59500BD334A /* UIView+NibLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392A14D31D81D59500BD334A /* UIView+NibLoading.swift */; };
-		392A14D81D82142100BD334A /* ScrollTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392A14D61D82142100BD334A /* ScrollTableViewCell.swift */; };
-		392A14D91D82142100BD334A /* ScrollTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 392A14D71D82142100BD334A /* ScrollTableViewCell.xib */; };
 		3964FE5B1D7F081F00C65F2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3964FE5A1D7F081F00C65F2B /* AppDelegate.swift */; };
 		3964FE5D1D7F081F00C65F2B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3964FE5C1D7F081F00C65F2B /* HomeViewController.swift */; };
 		3964FE601D7F081F00C65F2B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3964FE5E1D7F081F00C65F2B /* Main.storyboard */; };
@@ -30,8 +28,6 @@
 		392A14CF1D81CBD100BD334A /* AddsScrollView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddsScrollView.xib; sourceTree = "<group>"; };
 		392A14D11D81CCA300BD334A /* AddsScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddsScrollView.swift; sourceTree = "<group>"; };
 		392A14D31D81D59500BD334A /* UIView+NibLoading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+NibLoading.swift"; sourceTree = "<group>"; };
-		392A14D61D82142100BD334A /* ScrollTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollTableViewCell.swift; sourceTree = "<group>"; };
-		392A14D71D82142100BD334A /* ScrollTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScrollTableViewCell.xib; sourceTree = "<group>"; };
 		3964FE571D7F081F00C65F2B /* KFApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KFApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3964FE5A1D7F081F00C65F2B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3964FE5C1D7F081F00C65F2B /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -94,8 +90,6 @@
 			children = (
 				392A14CF1D81CBD100BD334A /* AddsScrollView.xib */,
 				392A14D11D81CCA300BD334A /* AddsScrollView.swift */,
-				392A14D61D82142100BD334A /* ScrollTableViewCell.swift */,
-				392A14D71D82142100BD334A /* ScrollTableViewCell.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -214,7 +208,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				392A14D91D82142100BD334A /* ScrollTableViewCell.xib in Resources */,
 				3964FE651D7F081F00C65F2B /* LaunchScreen.storyboard in Resources */,
 				392A14D01D81CBD100BD334A /* AddsScrollView.xib in Resources */,
 				3964FE6D1D8031FC00C65F2B /* Assets.xcassets in Resources */,
@@ -281,7 +274,6 @@
 				3964FE5D1D7F081F00C65F2B /* HomeViewController.swift in Sources */,
 				392A14D41D81D59500BD334A /* UIView+NibLoading.swift in Sources */,
 				392A14CC1D81A38200BD334A /* Product.swift in Sources */,
-				392A14D81D82142100BD334A /* ScrollTableViewCell.swift in Sources */,
 				392A14D21D81CCA300BD334A /* AddsScrollView.swift in Sources */,
 				392A14C41D806D2800BD334A /* ProductTableViewCell.swift in Sources */,
 				3964FE5B1D7F081F00C65F2B /* AppDelegate.swift in Sources */,
