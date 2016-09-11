@@ -8,5 +8,7 @@ target 'KFApp' do
   # Pods for KFApp
   pod 'Alamofire'
   pod 'JSONUtilities', '2.5.0'
-
+  pod 'TABSwiftLayout'
+  pod 'SDWebImage', '~>3.8'
+  
 end

@@ -9,6 +9,9 @@
 import UIKit
 import Alamofire
 import JSONUtilities
+import TABSwiftLayout
+import SDWebImage
+
 
 class ViewController: UIViewController {
   
@@ -20,25 +23,22 @@ class ViewController: UIViewController {
 
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
-    registerTableViewCells()
   }
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    registerTableViewCells()
 
     setupNavBar()
     
     tableView.tableHeaderView = scrollView
     initialRequest()
-    
-    
-//    searchBar.dimsBackgroundDuringPresentation = false
-//    searchBar.searchBar.sizeToFit()
-    
   }
   
   private func initialRequest() {
-    Alamofire.request(.GET, "http://localhost:8081/scrape?page=1&items_per_page=20", parameters: nil)
+//    Alamofire.request(.GET, "http://localhost:8081/scrape?page=1&items_per_page=20", parameters: nil)
+    Alamofire.request(.GET, "http://10.5.1.86:8081/scrape?page=1&items_per_page=20", parameters: nil)
+
       .responseJSON { response in
         
         guard response.result.isSuccess else {
@@ -60,11 +60,37 @@ class ViewController: UIViewController {
         self.tableView.reloadData()
     }
   }
+  
+  private func anotherRequest() {
+//    Alamofire.request(.GET, "http://localhost:8081/scrape?page=1&items_per_page=60", parameters: nil)
+    Alamofire.request(.GET, "http://10.5.1.86:8081/scrape?page=1&items_per_page=60", parameters: nil)
+      .responseJSON { response in
+        
+        guard response.result.isSuccess else {
+          print("Error while fetching products: \(response.result.error)")
+          return
+        }
+        
+        guard let productsFromResult = response.result.value as? [[String: AnyObject]] else {
+          print("Malformed data received from fetchProducts service")
+          return
+        }
+        
+        var products = [Product]()
+        for product in productsFromResult {
+          products.append(Product(jsonData: product))
+        }
+        
+        self.products = products
+        self.searchDisplayController?.searchResultsTableView.reloadData()
+    }
+  }
 
   private func registerTableViewCells() {
     let nib = UINib(nibName: "\(ProductTableViewCell.self)", bundle: nil)
     tableView.registerNib(nib, forCellReuseIdentifier: ProductTableViewCell.reuseIdentifier)
-    
+   
+    searchDisplayController?.searchResultsTableView.registerNib(nib, forCellReuseIdentifier: ProductTableViewCell.reuseIdentifier)
   }
   
   private func setupNavBar() {
@@ -91,7 +117,28 @@ extension ViewController: UITableViewDataSource {
         return UITableViewCell()
     }
     
-    cell.configure(product: products[indexPath.row])
+    let product = products[indexPath.row]
+    cell.imageView?.frame = CGRect(x: 16, y: 40, width: 40, height: 40)
+    cell.userInteractionEnabled = false
+    cell.configure(product: product)
+    
+    let urlString = "http:" + product.image!
+    
+    let theSDWebImageDownloader = SDWebImageDownloader.sharedDownloader()
+    theSDWebImageDownloader.downloadImageWithURL(NSURL(string: urlString),
+                                                  options: .ContinueInBackground,
+                                                  progress: { (i, j) in
+                                                    
+      }) { (image, data, error, flag) in
+        dispatch_async(dispatch_get_main_queue()) {
+          let c = tableView.cellForRowAtIndexPath(indexPath) as? ProductTableViewCell
+          c?.imageView?.image = image
+          c?.imageView?.contentMode = .ScaleAspectFill
+          c?.imageView?.frame = CGRect(x: 16, y: 40, width: 40, height: 40)
+          c?.layoutIfNeeded()
+        }
+    }
+
     return cell
   }
 
@@ -113,22 +160,13 @@ extension ViewController: UITableViewDelegate {
 }
 
 extension ViewController: UISearchBarDelegate {
-  func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
-  }
-  
-  func searchBarTextDidEndEditing(searchBar: UISearchBar) {
-  }
-  
-  func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-  }
-  
-  func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-  }
   
   func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+    products.removeAll()
     
+    if searchText == "Tool" {
+      anotherRequest()
+      searchDisplayController?.searchResultsTableView.reloadData()
+    }
   }
-  
-  
-
 }

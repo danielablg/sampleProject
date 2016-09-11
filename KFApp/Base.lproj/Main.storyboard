@@ -35,22 +35,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search product" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mlj-tk-EsB">
-                                <rect key="frame" x="40" y="64" width="280" height="44"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="44"/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="barTintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="searchField.textColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="delegate" destination="SOm-kD-PJL" id="Rc1-pg-ADL"/>
                                 </connections>
                             </searchBar>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="site-logo" translatesAutoresizingMaskIntoConstraints="NO" id="Lyd-QB-iHY">
-                                <rect key="frame" x="8" y="70" width="32" height="32"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="32" id="fX6-sq-sQo"/>
-                                    <constraint firstAttribute="width" constant="32" id="oxK-7D-vhm"/>
-                                </constraints>
-                            </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="F8m-sJ-7Yx">
                                 <rect key="frame" x="0.0" y="108" width="320" height="492"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -64,15 +62,19 @@
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="F8m-sJ-7Yx" firstAttribute="leading" secondItem="FzA-zR-jnc" secondAttribute="leading" id="5Hd-ZE-KhV"/>
-                            <constraint firstItem="F8m-sJ-7Yx" firstAttribute="top" secondItem="Lyd-QB-iHY" secondAttribute="bottom" constant="6" id="Ck1-mb-miS"/>
-                            <constraint firstItem="Lyd-QB-iHY" firstAttribute="top" secondItem="FzA-zR-jnc" secondAttribute="topMargin" constant="70" id="Jsl-3X-G3B"/>
+                            <constraint firstItem="mlj-tk-EsB" firstAttribute="leading" secondItem="FzA-zR-jnc" secondAttribute="leading" id="7jE-vz-Mck"/>
                             <constraint firstAttribute="trailing" secondItem="F8m-sJ-7Yx" secondAttribute="trailing" id="Sgb-D1-vMb"/>
                             <constraint firstItem="mlj-tk-EsB" firstAttribute="top" secondItem="FzA-zR-jnc" secondAttribute="topMargin" constant="64" id="US4-bs-pUa"/>
-                            <constraint firstItem="Lyd-QB-iHY" firstAttribute="leading" secondItem="FzA-zR-jnc" secondAttribute="leading" constant="8" id="WSm-3b-lY7"/>
+                            <constraint firstItem="F8m-sJ-7Yx" firstAttribute="top" secondItem="mlj-tk-EsB" secondAttribute="bottom" id="a7b-pe-G8A"/>
                             <constraint firstAttribute="bottomMargin" secondItem="F8m-sJ-7Yx" secondAttribute="bottom" id="gAx-Ii-tL3"/>
                             <constraint firstAttribute="trailing" secondItem="mlj-tk-EsB" secondAttribute="trailing" id="oGx-Za-76B"/>
-                            <constraint firstItem="mlj-tk-EsB" firstAttribute="leading" secondItem="Lyd-QB-iHY" secondAttribute="trailing" id="qk8-6k-LMw"/>
+                            <constraint firstItem="mlj-tk-EsB" firstAttribute="top" secondItem="Had-pI-XMa" secondAttribute="bottom" id="obn-id-kwj"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="US4-bs-pUa"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Home" id="f7i-F3-kvL"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -97,7 +99,4 @@
             <point key="canvasLocation" x="-306" y="327"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="site-logo" width="80" height="80"/>
-    </resources>
 </document>

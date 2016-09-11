@@ -19,10 +19,20 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SDWebImage.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>TABSwiftLayout.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>24CC15C43B250DC577AE87DFC2F5C2C5</key>
+		<key>33C16BF20B962321C14DCBB0C2BA5A6E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -33,6 +43,16 @@
 			<true/>
 		</dict>
 		<key>9717D9508E4BE3ECE89373A32C7AB918</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>98F437B1C7EA00F8A0C49B96499C1BC7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A9C1E1925218563B17AD2A8AF46D4EA7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
