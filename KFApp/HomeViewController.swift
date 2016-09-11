@@ -12,7 +12,6 @@ import JSONUtilities
 import TABSwiftLayout
 import SDWebImage
 
-
 class HomeViewController: UIViewController {
   
   @IBOutlet private var tableView: UITableView!
@@ -97,7 +96,6 @@ class HomeViewController: UIViewController {
   private func registerTableViewCells() {
     let nib = UINib(nibName: "\(ProductTableViewCell.self)", bundle: nil)
     tableView.registerNib(nib, forCellReuseIdentifier: ProductTableViewCell.reuseIdentifier)
-//    searchController.searchDisplayController?.searchResultsTableView.registerNib(nib, forCellReuseIdentifier: ProductTableViewCell.reuseIdentifier)
   }
   
   private func setupNavBar() {
