@@ -34,11 +34,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search product" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mlj-tk-EsB">
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search for product" translatesAutoresizingMaskIntoConstraints="NO" id="3nk-JI-RtG">
                                 <rect key="frame" x="0.0" y="64" width="320" height="44"/>
-                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="barTintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="barTintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="searchField.textColor">
@@ -46,7 +45,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <outlet property="delegate" destination="SOm-kD-PJL" id="Rc1-pg-ADL"/>
+                                    <outlet property="delegate" destination="SOm-kD-PJL" id="fgV-KV-ED1"/>
                                 </connections>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="F8m-sJ-7Yx">
@@ -61,18 +60,18 @@
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="3nk-JI-RtG" secondAttribute="trailing" id="3pT-tY-IFJ"/>
                             <constraint firstItem="F8m-sJ-7Yx" firstAttribute="leading" secondItem="FzA-zR-jnc" secondAttribute="leading" id="5Hd-ZE-KhV"/>
-                            <constraint firstItem="mlj-tk-EsB" firstAttribute="leading" secondItem="FzA-zR-jnc" secondAttribute="leading" id="7jE-vz-Mck"/>
+                            <constraint firstItem="3nk-JI-RtG" firstAttribute="leading" secondItem="FzA-zR-jnc" secondAttribute="leading" id="JbZ-7A-BnE"/>
                             <constraint firstAttribute="trailing" secondItem="F8m-sJ-7Yx" secondAttribute="trailing" id="Sgb-D1-vMb"/>
-                            <constraint firstItem="mlj-tk-EsB" firstAttribute="top" secondItem="FzA-zR-jnc" secondAttribute="topMargin" constant="64" id="US4-bs-pUa"/>
-                            <constraint firstItem="F8m-sJ-7Yx" firstAttribute="top" secondItem="mlj-tk-EsB" secondAttribute="bottom" id="a7b-pe-G8A"/>
+                            <constraint firstItem="3nk-JI-RtG" firstAttribute="top" secondItem="FzA-zR-jnc" secondAttribute="topMargin" constant="64" id="XYt-6q-FJO"/>
                             <constraint firstAttribute="bottomMargin" secondItem="F8m-sJ-7Yx" secondAttribute="bottom" id="gAx-Ii-tL3"/>
-                            <constraint firstAttribute="trailing" secondItem="mlj-tk-EsB" secondAttribute="trailing" id="oGx-Za-76B"/>
-                            <constraint firstItem="mlj-tk-EsB" firstAttribute="top" secondItem="Had-pI-XMa" secondAttribute="bottom" id="obn-id-kwj"/>
+                            <constraint firstItem="3nk-JI-RtG" firstAttribute="top" secondItem="Had-pI-XMa" secondAttribute="bottom" id="nXe-zz-Kw0"/>
+                            <constraint firstItem="F8m-sJ-7Yx" firstAttribute="top" secondItem="3nk-JI-RtG" secondAttribute="bottom" id="vle-2i-XoV"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="US4-bs-pUa"/>
+                                <exclude reference="XYt-6q-FJO"/>
                             </mask>
                         </variation>
                     </view>
@@ -80,8 +79,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="600"/>
                     <connections>
-                        <outlet property="searchBar" destination="mlj-tk-EsB" id="1aW-ah-Scv"/>
-                        <outlet property="searchDisplayController" destination="utw-Mf-hoA" id="6nC-uT-gxp"/>
+                        <outlet property="searchDisplayController" destination="l6H-BR-Dj8" id="7KV-wf-ab5"/>
                         <outlet property="tableView" destination="F8m-sJ-7Yx" id="tJB-va-8Gn"/>
                     </connections>
                 </viewController>
@@ -89,10 +87,18 @@
                 <searchDisplayController id="utw-Mf-hoA">
                     <connections>
                         <outlet property="delegate" destination="SOm-kD-PJL" id="OiQ-IB-1Xb"/>
-                        <outlet property="searchBar" destination="mlj-tk-EsB" id="1vh-kD-1W0"/>
                         <outlet property="searchContentsController" destination="SOm-kD-PJL" id="GIw-HI-yjx"/>
                         <outlet property="searchResultsDataSource" destination="SOm-kD-PJL" id="WFN-Jq-b8a"/>
                         <outlet property="searchResultsDelegate" destination="SOm-kD-PJL" id="zaQ-0c-ILk"/>
+                    </connections>
+                </searchDisplayController>
+                <searchDisplayController id="l6H-BR-Dj8">
+                    <connections>
+                        <outlet property="delegate" destination="SOm-kD-PJL" id="ElH-fN-gFF"/>
+                        <outlet property="searchBar" destination="3nk-JI-RtG" id="75Y-mq-sCb"/>
+                        <outlet property="searchContentsController" destination="SOm-kD-PJL" id="8yW-jZ-ngg"/>
+                        <outlet property="searchResultsDataSource" destination="SOm-kD-PJL" id="GQu-P4-tV0"/>
+                        <outlet property="searchResultsDelegate" destination="SOm-kD-PJL" id="iO6-VK-URl"/>
                     </connections>
                 </searchDisplayController>
             </objects>
