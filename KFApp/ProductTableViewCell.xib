@@ -11,7 +11,7 @@
             <rect key="frame" x="0.0" y="0.0" width="356" height="150"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5dy-kJ-AUx" id="YWh-ok-0Ft">
-                <rect key="frame" x="0.0" y="0.0" width="356" height="150"/>
+                <rect key="frame" x="0.0" y="0.0" width="356" height="149.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Abru Steel Woodscrew (Dia)4mm (L)15mm" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SA4-Mb-87f">
@@ -65,7 +65,7 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="site-logo" translatesAutoresizingMaskIntoConstraints="NO" id="tA1-Yp-Jva">
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tA1-Yp-Jva">
                         <rect key="frame" x="16" y="40" width="40" height="40"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="IqF-7N-gjh"/>
@@ -96,20 +96,12 @@
                     <constraint firstItem="hQd-vp-q11" firstAttribute="bottom" secondItem="TVx-aH-tZ5" secondAttribute="bottom" id="d1d-EC-E7C"/>
                     <constraint firstItem="SA4-Mb-87f" firstAttribute="leading" secondItem="YWh-ok-0Ft" secondAttribute="leading" constant="16" id="ibi-xE-Yig"/>
                     <constraint firstItem="hQd-vp-q11" firstAttribute="top" secondItem="TVx-aH-tZ5" secondAttribute="top" id="n7e-UJ-fWg"/>
-                    <constraint firstAttribute="bottom" secondItem="Aqb-yX-hF1" secondAttribute="bottom" constant="43.5" id="q7f-ZX-fHl"/>
                     <constraint firstItem="mnc-cs-qh7" firstAttribute="leading" secondItem="9Vy-iv-BHm" secondAttribute="leading" id="qDi-MC-xXb"/>
-                    <constraint firstItem="9Vy-iv-BHm" firstAttribute="centerY" secondItem="tA1-Yp-Jva" secondAttribute="centerY" id="rcf-P3-bzi"/>
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="mnc-cs-qh7" secondAttribute="trailing" constant="16" id="war-QE-EYu"/>
                     <constraint firstItem="tA1-Yp-Jva" firstAttribute="top" secondItem="SA4-Mb-87f" secondAttribute="bottom" constant="8" id="xSq-ik-oEY"/>
                     <constraint firstItem="sV7-G5-dAg" firstAttribute="bottom" secondItem="9Vy-iv-BHm" secondAttribute="bottom" id="zei-3T-EN4"/>
                     <constraint firstItem="Aqb-yX-hF1" firstAttribute="top" secondItem="TVx-aH-tZ5" secondAttribute="bottom" constant="3" id="zh0-Jo-r3h"/>
                 </constraints>
-                <variation key="default">
-                    <mask key="constraints">
-                        <exclude reference="rcf-P3-bzi"/>
-                        <exclude reference="q7f-ZX-fHl"/>
-                    </mask>
-                </variation>
             </tableViewCellContentView>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="tA1-Yp-Jva" secondAttribute="bottom" constant="32" id="PCV-V2-LU1"/>
@@ -129,7 +121,4 @@
             <point key="canvasLocation" x="675" y="494"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="site-logo" width="80" height="80"/>
-    </resources>
 </document>

@@ -12,8 +12,6 @@ final class ProductTableViewCell: UITableViewCell {
   
   static let reuseIdentifier = "ProductTableViewCell"
   
-  @IBOutlet weak var productImage: UIImageView!
-  
   @IBOutlet private var productPrice: UILabel!
   @IBOutlet private var productTitle: UILabel!
   @IBOutlet private var productCollection: UILabel!

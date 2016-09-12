@@ -6,15 +6,16 @@
 //  Copyright © 2016 TheAppBusiness. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct Product {
   var name: String?
   var price: String?
+  var productImage: UIImage?
   var homeDelivery: String?
   var inStore: String?
   var availableForCollection: String?
-  var image: String?
+  var imageURLString: String?
 }
 
 extension Product {
@@ -25,6 +26,7 @@ extension Product {
     homeDelivery = jsonData.jsonKey("home_deliver")
     inStore = jsonData.jsonKey("in_store")
     availableForCollection = jsonData.jsonKey("click_and_collect")
-    image = jsonData.jsonKey("img")
+    imageURLString = jsonData.jsonKey("img")
+//    productImage = UIImage()
   }
 }

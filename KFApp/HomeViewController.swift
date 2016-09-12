@@ -15,12 +15,33 @@ import SDWebImage
 class HomeViewController: UIViewController {
   
   @IBOutlet private var tableView: UITableView!
-  
+  let PlaceHolderCellIdentifier = "PlaceholderCell"
+
   private var products: [Product] = []
   private let searchController = UISearchController(searchResultsController: nil)
   
-  override func viewWillAppear(animated: Bool) {
-    super.viewWillAppear(animated)
+  // the set of IconDownloader objects for each app
+  private var imageDownloadsInProgress: [NSIndexPath: ImageDownloader] = [:]
+  
+  private func terminateAllDownloads() {
+    // terminate all pending download connections
+    let allDownloads = self.imageDownloadsInProgress.values
+    for download in allDownloads {download.cancelDownload()}
+    
+    self.imageDownloadsInProgress.removeAll(keepCapacity: false)
+  }
+  
+  // -------------------------------------------------------------------------------
+  deinit {
+    // terminate all pending download connections
+    self.terminateAllDownloads()
+  }
+  
+  override func didReceiveMemoryWarning() {
+    super.didReceiveMemoryWarning()
+    
+    // terminate all pending download connections
+    self.terminateAllDownloads()
   }
 
   override func viewDidLoad() {
@@ -28,7 +49,12 @@ class HomeViewController: UIViewController {
     registerTableViewCells()
     setupNavBar()
     setupSearchController()
-    initialRequest()
+//    initialRequest()s
+    
+    self.imageDownloadsInProgress = [:]
+
+    
+    goodRequest()
   }
 
   private func setupSearchController() {
@@ -40,6 +66,7 @@ class HomeViewController: UIViewController {
     searchController.searchBar.placeholder = "Search for product"
     searchController.searchBar.barTintColor = UIColor.darkGrayColor()
     searchController.searchBar.tintColor = UIColor.whiteColor()
+    searchController.searchBar.translucent = false
   }
   
   private func initialRequest() {
@@ -92,6 +119,58 @@ class HomeViewController: UIViewController {
         self.tableView.reloadData()
     }
   }
+  
+  func handleError(error: NSError) {
+    let errorMessage = error.localizedDescription
+    
+    let alert = UIAlertController(title: "Cannot Show Products",
+                                  message: errorMessage,
+                                  preferredStyle: .ActionSheet)
+    let OKAction = UIAlertAction(title: "OK", style: .Default) {action in
+      // dissmissal of alert completed
+    }
+    
+    alert.addAction(OKAction)
+    
+    presentViewController(alert, animated: true, completion: nil)
+
+  }
+  
+  private func goodRequest() {
+    let request = NSURLRequest(URL: NSURL(string: "http://localhost:8081/scrape?page=1&items_per_page=7")!)
+    
+    // create a session data task to obtain and the feed
+    let sessionTask = NSURLSession.sharedSession().dataTaskWithRequest(request) {
+      data, response, error in
+      
+      if let actualError = error {
+        NSOperationQueue.mainQueue().addOperationWithBlock {
+          UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+          self.handleError(actualError)
+        }
+      } else {
+        // create the queue to run our ParseOperation
+        let  jsonDictionary = try? NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments) as! NSArray
+        
+        var products = [Product]()
+        for product in jsonDictionary! {
+          products.append(Product(jsonData: product as! [String : AnyObject]))
+        }
+        
+        
+        dispatch_async(dispatch_get_main_queue()) {
+          self.products.appendContentsOf(products)
+
+          self.tableView.reloadData()
+        }
+      }
+    }
+    
+    sessionTask.resume()
+    
+    // show in the status bar that network activity is starting
+    UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+  }
 
   private func registerTableViewCells() {
     let nib = UINib(nibName: "\(ProductTableViewCell.self)", bundle: nil)
@@ -116,35 +195,72 @@ extension HomeViewController: UITableViewDataSource {
   }
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    guard let
-      cell = tableView.dequeueReusableCellWithIdentifier(ProductTableViewCell.reuseIdentifier) as? ProductTableViewCell
-      else {
-        return UITableViewCell()
-    }
     
-    let product = products[indexPath.row]
-    cell.imageView?.frame = CGRect(x: 16, y: 40, width: 40, height: 40)
-    cell.userInteractionEnabled = false
-    cell.configure(product: product)
+    let nodeCount = self.products.count ?? 0
     
-    let urlString = "http:" + product.image!
-    
-    let theSDWebImageDownloader = SDWebImageDownloader.sharedDownloader()
-    theSDWebImageDownloader.downloadImageWithURL(NSURL(string: urlString),
-                                                  options: .ContinueInBackground,
-                                                  progress: { (i, j) in
-                                                    
-      }) { (image, data, error, flag) in
-        dispatch_async(dispatch_get_main_queue()) {
-          let c = tableView.cellForRowAtIndexPath(indexPath) as? ProductTableViewCell
-          c?.imageView?.image = image
-          c?.imageView?.contentMode = .ScaleAspectFill
-          c?.imageView?.frame = CGRect(x: 16, y: 40, width: 40, height: 40)
-          c?.layoutIfNeeded()
-        }
-    }
+    if nodeCount == 0 && indexPath.row == 0 {
+      // add a placeholder cell while waiting on table data
+      let cell = tableView.dequeueReusableCellWithIdentifier(PlaceHolderCellIdentifier, forIndexPath: indexPath)
+      return cell
 
-    return cell
+    } else {
+      let cell = tableView.dequeueReusableCellWithIdentifier(ProductTableViewCell.reuseIdentifier, forIndexPath: indexPath) as? ProductTableViewCell
+      
+      // Leave cells empty if there's no data yet
+      if nodeCount > 0 {
+        // Set up the cell representing the app
+        let product = self.products[indexPath.row] as Product
+        
+//        cell!.configure(product: product)
+        
+        // Only load cached images; defer new downloads until scrolling ends
+        if product.productImage == nil {
+          if !self.tableView.dragging && !self.tableView.decelerating {
+            self.startIconDownload(product, forIndexPath: indexPath)
+          }
+          // if a download is deferred or in progress, return a placeholder image
+          cell!.imageView!.image = UIImage(named: "Placeholder.png")!
+        } else {
+          cell!.imageView!.image = product.productImage
+        }
+      }
+      return cell!
+    }
+  }
+  
+  private func startIconDownload(product: Product, forIndexPath indexPath: NSIndexPath) {
+    var iconDownloader = self.imageDownloadsInProgress[indexPath]
+    if iconDownloader == nil {
+      iconDownloader = ImageDownloader(product: product)
+      iconDownloader!.completionHandler = { img in
+        
+        let cell = self.tableView.cellForRowAtIndexPath(indexPath) as? ProductTableViewCell
+                
+        // Display the newly loaded image
+//        product.productImage = img
+        cell?.imageView?.image = img
+        
+        self.imageDownloadsInProgress.removeValueForKey(indexPath)
+        
+      }
+      self.imageDownloadsInProgress[indexPath] = iconDownloader
+      iconDownloader!.startDownload()
+    }
+    
+  }
+  
+  private func loadImagesForOnscreenRows() {
+    if self.products.count > 0 {
+      let visiblePaths = self.tableView.indexPathsForVisibleRows!
+      for indexPath in visiblePaths as [NSIndexPath] {
+        let product = self.products[indexPath.row]
+        
+        // Avoid the app icon download if the app already has an icon
+        if product.productImage == nil {
+          self.startIconDownload(product, forIndexPath: indexPath)
+        }
+      }
+    }
   }
 
 }
@@ -176,6 +292,16 @@ extension HomeViewController: UITableViewDelegate {
     }
     return 179
   }
+  
+  func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    if !decelerate {
+      self.loadImagesForOnscreenRows()
+    }
+  }
+  
+  func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+    self.loadImagesForOnscreenRows()
+  }
 }
 
 extension HomeViewController: UISearchResultsUpdating {
@@ -184,7 +310,7 @@ extension HomeViewController: UISearchResultsUpdating {
     products = []
     
     if searchText == "Tool" {
-      anotherRequest()
+      goodRequest()
     } else {
       tableView.reloadData()
     }
